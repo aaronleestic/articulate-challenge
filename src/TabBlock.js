@@ -74,7 +74,7 @@ export function TabBlock({ tabs }){
   };
 
   function isLeftOrRightArrowPress(code){
-    return code === 37 || code === 38;
+    return code === 37 || code === 39;
   }
 
   function calcNextTabIndex(keyCode, oldIndex, maxIndex){
