@@ -1,0 +1,209 @@
+$transitionTime: 300ms;
+$activeColor: #747a7e;
+
+.container {
+  max-width: 47em;
+  border: 1px solid #DDD;
+  color: #313537;
+  font-family: 'Lato', sans-serif;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.tabsWrap {
+  position: relative;
+
+  //allows clicking of tab underneath the control overlays
+  &:hover {
+    .control {
+      pointer-events: auto;
+      opacity: 1;
+    }
+  }
+}
+
+.tabList {
+  height: 5em;
+  line-height: 1.25em;
+  display: flex;
+  overflow: hidden;
+
+  //disables focus online for mouse tab clicks; class is programmatically inserted in code
+  &:global(.mouse){
+    .tab:focus {
+      outline: none;
+    }
+  }
+}
+
+.controls {
+
+  //overlays the controls over the tabs
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
+  pointer-events: none;
+
+  //spaces out the control to far left and far right
+  //while vertically centering it
+  display: flex;
+  align-items: center;
+
+}
+
+.controlWrapper {
+
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 1;
+
+  //positions the chevrons on initial load
+  //when controls may not be mounted, instead of flex in-between
+  position: absolute;
+
+  //shows and hides the controls as either left or right end is reached
+  transition: opacity $transitionTime ease-out;
+  &:global(.enter-active), &:global(.exit){
+    opacity: 1;
+  }
+  &:global(.enter), &:global(.exit-active) {
+    opacity: 0;
+  }
+  &:global(.exit-done){
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+//gradient fade out at the end of tabList when there are more scrolling available
+.leftCtrl:before, .rightCtrl:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: calc(100% - 2px);
+  width: 8%;
+  opacity: 1;
+  z-index: -1;
+}
+.leftCtrl {
+  left: 0;
+  &:before {
+    background: linear-gradient(90deg, #fff 0, hsla(0,0%,100%,.2));
+  }
+}
+.rightCtrl {
+  right: 0;
+  &:after {
+    background: linear-gradient(270deg, #fff 0, hsla(0,0%,100%,.2));
+  }
+}
+
+.control {
+  border-radius: .3em;
+  padding: 1.4em 1em;
+  color: white;
+  margin: .6em;
+  background-color: $activeColor;
+  pointer-events: all;
+
+  transition: opacity $transitionTime ease-out;
+  opacity: 0;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.tab {
+
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: .75em;
+  overflow: hidden;
+  outline-offset: -.3em;
+
+  //horizontally centers the text
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  //vertically centers the text
+  align-items: center;
+
+  //unselected states
+  background-color: #f5f5f5;
+  border-right: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  font-weight: bolder;
+  cursor: pointer;
+
+  transition:
+     border $transitionTime ease-out,
+     background-color $transitionTime ease-out;
+
+  &:hover {
+    background-color: #efefef;
+  }
+
+  //selected state
+  &.active {
+    color: $activeColor;
+    background-color: white;
+    border-bottom: 1px solid transparent;
+    cursor: default;
+  }
+
+  span {
+    margin: 0 1em;
+  }
+
+  //responsive width
+  min-width: 40%;
+  @media (min-width: 30em){
+    min-width: 30%;
+  }
+  @media (min-width: 45em){
+    min-width: 23%;
+  }
+}
+
+.dummyTab {
+  min-width: 4rem; //for the width of control chevron
+  border-right: 0;
+}
+
+//for when dummy tab gets selected
+.tabPanelWrapper {
+  min-height: 5em;
+}
+
+.tabPanel {
+
+  font-family: 'Merriweather', serif;
+  font-weight: 300;
+  padding: 1.5em 2em;
+  margin-bottom: 2em;
+  line-height: 1.5em;
+
+  //react css transition for the tab content
+  transition: opacity $transitionTime ease-out;
+  &:global(.enter) {
+    opacity: 0;
+  }
+  &:global(.enter-active){
+    opacity: 1;
+  }
+  &:global(.exit){
+    display: none;
+  }
+
+  p {
+    margin: 0 0 1.5em;
+  }
+}
+
+.img {
+  max-width: 100%;
+  margin: .5em 0 1em;
+}
