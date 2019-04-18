@@ -2,8 +2,8 @@ import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { object, withKnobs } from "@storybook/addon-knobs";
-import styles from "./App.module.scss";
-import { original } from "./data";
+import styles from "../App.module.scss";
+import { original } from "../data";
 import { TabBlock } from "./TabBlock";
 
 addDecorator(withA11y);

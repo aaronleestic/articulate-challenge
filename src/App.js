@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TabBlock } from "./TabBlock";
+import { TabBlock } from "./TabBlock/TabBlock";
 import { original, originalX3 } from "./data";
 import styles from "./App.module.scss";
 

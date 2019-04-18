@@ -29,9 +29,24 @@ $activeColor: #747a7e;
   overflow: hidden;
 
   //disables focus online for mouse tab clicks; class is programmatically inserted in code
-  &:global(.mouse){
+  &:global(.has-mouse){
     .tab:focus {
       outline: none;
+    }
+  }
+
+  //allows tab list to be touch scrollable
+  //hides the left and right arrows that show up on hover
+  &:global(.has-touch){
+    overflow-x: auto;
+    + .controls {
+      .controlWrapper {
+        pointer-events: none;
+      }
+      .control{
+        opacity: 0;
+        pointer-events: none;
+      }
     }
   }
 }
