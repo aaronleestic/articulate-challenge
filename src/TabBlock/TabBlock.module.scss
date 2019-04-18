@@ -3,6 +3,7 @@ $activeColor: #747a7e;
 
 .container {
   max-width: 47em;
+  min-width: 20em;
   border: 1px solid #DDD;
   color: #313537;
   font-family: 'Lato', sans-serif;
@@ -98,7 +99,7 @@ $activeColor: #747a7e;
   position: absolute;
   top: 0;
   height: calc(100% - 2px);
-  width: 100%;
+  width: 75%;
   opacity: 1;
   z-index: -1;
 }
@@ -179,13 +180,14 @@ $activeColor: #747a7e;
   @media (min-width: 30em){
     min-width: 30%;
   }
-  @media (min-width: 45em){
+  @media (min-width: 47em){
     min-width: 23%;
   }
 }
 
 .dummyTab {
-  min-width: 4rem; //for the width of control chevron
+  min-width: 4em; //for the width of control chevron
+  width: 100%; //fills the row if there aren't enough tabs
   border-right: 0;
 }
 
@@ -215,7 +217,7 @@ $activeColor: #747a7e;
   }
 
   p {
-    margin: 0 0 1.5em;
+    margin: .5em 0 1.5em;
   }
 }
 

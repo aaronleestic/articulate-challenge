@@ -73,8 +73,10 @@ export function useAutoScrollTabIntoView(tabsRef, tabs, selectedTab){
     } = tabRef.getBoundingClientRect();
 
     //uses dimension to determine whether imperative scrolling is needed to make tab visible
-    if ( tabRight > containerRight )
-      tabsList.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    if ( tabRight > containerRight ) {
+      tabsList.scrollBy({left: scrollAmount, behavior: "smooth"});
+      console.log(123);
+    }
     else if ( tabLeft < containerLeft )
       tabsList.scrollBy({ left: -scrollAmount, behavior: "smooth" });
 

@@ -31,14 +31,14 @@ export function calcNextTab(keyCode, item, array){
   }
 }
 
-export function calcScrollAmount(currentPos, viewWidth, totalWidth, discreteSize, direction){
+export function calcScrollAmount(currentPos, viewWidth, totalWidth, stepSize, direction){
   if ( direction === RIGHT ){
 
     //new offset position for one page
     const proposedPosition = currentPos + viewWidth;
 
     //adjust down the position by discrete length of one tab width
-    const targetPosition = discretize(proposedPosition, discreteSize) - 60;
+    const targetPosition = discretize(proposedPosition, stepSize) - 60;
 
     //don't want to overshoot the maximum width
     return Math.min(targetPosition, totalWidth - viewWidth);
@@ -46,14 +46,14 @@ export function calcScrollAmount(currentPos, viewWidth, totalWidth, discreteSize
   } else {
     //same logic but in the other direction
     const proposedPosition = currentPos - viewWidth;
-    const targetPosition = discretize(proposedPosition, discreteSize) + discreteSize + 60;
+    const targetPosition = discretize(proposedPosition, stepSize) + stepSize + 60;
     return Math.max(targetPosition, 0);
   }
 }
 
-export function discretize(totalLength, discreteLength){
-  const maxSteps = Math.floor(totalLength/discreteLength);
-  return maxSteps * discreteLength;
+export function discretize(totalLength, stepSize){
+  const maxSteps = Math.floor(totalLength/stepSize);
+  return maxSteps * stepSize;
 }
 
 TabBlock.defaultProps = {

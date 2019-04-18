@@ -61,3 +61,49 @@ export const originalX3 = original
     title: tab.title+index,
     id: index
   }));
+
+export const minimalContent = [{
+  id: 1,
+  title: 'a',
+  content: [{
+    type: Types.TEXT,
+    text: "minimal"
+  }]
+}];
+
+export const variedTabs = [1,2,3,4,5,6,7,8,9,10].map(integer => ({
+  id: integer,
+  title: integer + ( integer % 2 === 0 ? ' additional text' : '' ),
+  content: []
+}));
+
+export const manyShortTabs = [1,2,3,4,5,6,7,8,9,10].map(integer => ({
+  id: integer,
+  title: String(integer),
+  content: []
+}));
+
+export const longContent = [{
+  id: 1,
+  title: 'long content',
+  content: [{
+    type: Types.IMAGE,
+    src: "64x64icon.png",
+    alt: "small icon"
+  }, {
+    type: Types.IMAGE,
+    src: "articulate_logo.png",
+    alt: "logo"
+  }, {
+    type: Types.TEXT,
+    text: "text"
+  }, {
+    type: Types.IMAGE,
+    src: "articulate_logo.png",
+    alt: "logo"
+  }, {
+    type: Types.IMAGE,
+    src: "64x64icon.png",
+    alt: "small icon"
+  }]
+}];
