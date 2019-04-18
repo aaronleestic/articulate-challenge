@@ -63,7 +63,7 @@ TabBlock.defaultProps = {
 TabBlock.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number,]).isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     content: PropTypes.arrayOf(PropTypes.shape({
       type: PropTypes.oneOf([Types.TEXT, Types.IMAGE]).isRequired,
       text: PropTypes.string,
@@ -95,7 +95,7 @@ export function TabBlock({ tabs }){
 
   //for touch screen users
   //removes on hover controls, and allows tab list to be overflow-x scrollable
-  useStyleModifiers('touchstart', tabListRef, { add: ['has-touch'] });
+  useStyleModifiers('touchstart', tabListRef, { add: ['has-touch'] }, { passive: true });
 
   //handles key press of left and right arrow on tab list
   const navigateTab = (e) => {
@@ -131,26 +131,19 @@ export function TabBlock({ tabs }){
           ref={tabListRef}
           role="tablist">
 
-        { tabs.map((t, index) => (
-          <a role="tab"
+        { tabs.map(t => (
+          <span role="tab"
             className={cx(styles.tab, { [styles.active]: t === selectedTab })}
             key={t.id}
-            tabIndex={ index ? -1 : 0 }
+            tabIndex={ t === selectedTab ? 0 : -1 }
             aria-selected={ t === selectedTab }
             id={getId([t.id])}
             aria-controls={getId([t.id, 'content'])}
             onKeyDown={navigateTab}
             onClick={() => setTab(t)}>
             <span>{t.title}</span>
-          </a>
+          </span>
         ))}
-          <span //dummy tab
-            onClick={() => setTab(null)}
-            className={cx(
-              styles.tab,
-              styles.dummyTab,
-              { [styles.active]: null === selectedTab }
-            )}/>
         </div>
 
         <div className={styles.controls}>
@@ -177,7 +170,6 @@ export function TabBlock({ tabs }){
       </div>
 
       <TransitionGroup className={styles.tabPanelWrapper}>
-      { selectedTab &&
         <CSSTransition
           key={selectedTab.id}
           className={styles.tabPanel}
@@ -201,7 +193,6 @@ export function TabBlock({ tabs }){
           ))}
           </div>
         </CSSTransition>
-      }
       </TransitionGroup>
 
     </div>

@@ -1,14 +1,24 @@
 $transitionTime: 300ms;
 $activeColor: #747a7e;
+$mediumBreakPoint: 30em;
+$largeBreakPoint: 47em;
 
 .container {
-  max-width: 47em;
-  min-width: 20em;
+  max-width: 45em;
+  min-width: 100%;
   border: 1px solid #DDD;
   color: #313537;
   font-family: 'Lato', sans-serif;
   overflow: hidden;
   scroll-behavior: smooth;
+  box-shadow: 0 0.4rem 1.2rem 0.2rem rgba(0,0,0,.05);
+
+  @media (min-width: $mediumBreakPoint){
+    min-width: 28em;
+  }
+  @media (min-width: $largeBreakPoint){
+    min-width: 45em;
+  }
 }
 
 .tabsWrap {
@@ -140,10 +150,11 @@ $activeColor: #747a7e;
   overflow: hidden;
   outline-offset: -.3em;
 
-  //horizontally centers the text
+  //horizontally centers the text, and fill container
   display: flex;
   justify-content: center;
   text-align: center;
+  flex: 0 1 100%;
 
   //vertically centers the text
   align-items: center;
@@ -154,6 +165,9 @@ $activeColor: #747a7e;
   border-bottom: 1px solid #DDD;
   font-weight: bolder;
   cursor: pointer;
+  &:last-child {
+    border-right: 0;
+  }
 
   transition:
      border $transitionTime ease-out,
@@ -177,18 +191,12 @@ $activeColor: #747a7e;
 
   //responsive width
   min-width: 40%;
-  @media (min-width: 30em){
+  @media (min-width: $mediumBreakPoint){
     min-width: 30%;
   }
-  @media (min-width: 47em){
+  @media (min-width: $largeBreakPoint){
     min-width: 23%;
   }
-}
-
-.dummyTab {
-  min-width: 4em; //for the width of control chevron
-  width: 100%; //fills the row if there aren't enough tabs
-  border-right: 0;
 }
 
 //for when dummy tab gets selected

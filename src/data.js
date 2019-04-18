@@ -52,6 +52,10 @@ export const original = [{
     type: Types.TEXT,
     text: "Every creative endeavor requires that you take risks. If you try and don't succeed, you've still learned something. It took Thomas Edison more than 10,000 tries to invent a viable lightbulb. You're not failing. You're discovering what doesn't work."
   }]
+}, {
+  id: 5,
+  title: "",
+  content: []
 }];
 
 export const originalX3 = original
@@ -74,12 +78,6 @@ export const minimalContent = [{
 export const variedTabs = [1,2,3,4,5,6,7,8,9,10].map(integer => ({
   id: integer,
   title: integer + ( integer % 2 === 0 ? ' additional text' : '' ),
-  content: []
-}));
-
-export const manyShortTabs = [1,2,3,4,5,6,7,8,9,10].map(integer => ({
-  id: integer,
-  title: String(integer),
   content: []
 }));
 
@@ -106,4 +104,14 @@ export const longContent = [{
     src: "64x64icon.png",
     alt: "small icon"
   }]
+}];
+
+export const dualTabs = [{
+  id: 1,
+  title: "left tab",
+  content: []
+}, {
+  id: 2,
+  title: "right tab",
+  content: []
 }];

@@ -1,14 +1,14 @@
 import debounce from "lodash.debounce";
 import { useState, useEffect } from 'react';
 
-export function useStyleModifiers(eventName, ref, { add = [], remove = [] }){
+export function useStyleModifiers(eventName, ref, { add = [], remove = [] }, opts = {}){
   useEffect(() => {
     const element = ref.current;
     const eventListener = () => {
       add.forEach(cls => element.classList.add(cls));
       remove.forEach(cls => element.classList.remove(cls));
     };
-    element.addEventListener(eventName, eventListener);
+    element.addEventListener(eventName, eventListener, opts);
     return () => element.removeEventListener(eventName, eventListener);
   }, [])
 }
@@ -53,10 +53,6 @@ export const getWidthsOf = (tabsList) => ({
 
 export function useAutoScrollTabIntoView(tabsRef, tabs, selectedTab){
   useEffect(() => {
-
-    //in case dummy tab at the end of list gets selected
-    if ( selectedTab === null )
-      return;
 
     //retrieve positions of tab and tab list
     const tabIndex = tabs.indexOf(selectedTab);
