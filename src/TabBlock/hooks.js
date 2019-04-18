@@ -9,7 +9,7 @@ export function useStyleModifiers(eventName, ref, { add = [], remove = [] }, opt
       remove.forEach(cls => element.classList.remove(cls));
     };
     element.addEventListener(eventName, eventListener, opts);
-    return () => element.removeEventListener(eventName, eventListener);
+    return () => element.removeEventListener(eventName, eventListener, opts);
   }, [])
 }
 
