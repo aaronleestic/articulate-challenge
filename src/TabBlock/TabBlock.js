@@ -6,7 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { useAutoScrollTabIntoView, useControlVisibilityListener, useStyleModifiers, getWidthsOf } from "./hooks";
+import { useAutoScrollTabIntoView, useControlVisibilityListener, useStyleModifiers, getWidthsOf } from "./TabBlock.hooks";
 import styles from "./TabBlock.module.scss";
 
 library.add(faChevronLeft, faChevronRight);
