@@ -77,9 +77,9 @@ export const minimalContent = [{
   }]
 }];
 
-export const variedTabs = [1,2,3,4,5,6,7,8,9,10].map(integer => ({
-  id: integer,
-  title: integer + ( integer % 2 === 0 ? ' additional text' : '' ),
+export const variedTabs = Array.from(new Array(12)).map((el, index) => ({
+  id: index,
+  title: index + ( index % 2 === 0 ? ' additional text long text' : '' ),
   content: []
 }));
 

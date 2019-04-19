@@ -8,8 +8,8 @@ import { Bar, Line } from "react-chartjs-2";
 
 const paragraphStyles = { margin: '.5em 0 1.5em' };
 const imgStyles =  {
-  'max-width': '100%',
-  'margin': '.5em 0 1em'
+  maxWidth: '100%',
+  margin: '.5em 0 1em'
 };
 
 function formatIntoJsx(data){
@@ -29,7 +29,7 @@ function formatIntoJsx(data){
         <Bar data={c.data} options={c.options}/>
         }
         { c.type === Types.LINE_CHART &&
-        <div style={{ 'margin-bottom': '3em' }}>
+        <div style={{ marginBottom: '2em' }}>
           <Line data={c.data} options={c.options}/>
         </div>
         }

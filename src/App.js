@@ -21,7 +21,7 @@ class App extends Component {
           }
           { c.type === Types.IMAGE &&
           <ImageZoom
-            image={{src: c.src, alt: c.alt, style: { 'max-width': '100%', 'margin': '.5em 0 1em' } }}
+            image={{src: c.src, alt: c.alt, style: { maxWidth: '100%', margin: '.5em 0 1em' } }}
             zoomImage={{src: c.src, alt: c.alt}}/>
           }
           { c.type === Types.BAR_CHART &&
