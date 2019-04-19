@@ -34,10 +34,12 @@ $largeBreakPoint: 47em;
 }
 
 .tabList {
+  
   height: 5em;
   line-height: 1.25em;
   display: flex;
   overflow: hidden;
+  margin-right: -1px;
 
   //disables focus online for mouse tab clicks; class is programmatically inserted in code
   &:global(.has-mouse){
