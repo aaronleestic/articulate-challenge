@@ -1,15 +1,13 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import ImageZoom from 'react-medium-image-zoom';
 import nanoid from 'nanoid';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import styles from "./TabBlock.module.scss";
-import { Types } from "../data";
 import { useAutoScrollTabIntoView, useControlVisibilityListener, useStyleModifiers, getWidthsOf } from "./hooks";
+import styles from "./TabBlock.module.scss";
 
 library.add(faChevronLeft, faChevronRight);
 const LEFT = 'left';
@@ -62,14 +60,9 @@ TabBlock.defaultProps = {
 
 TabBlock.propTypes = {
   tabs: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number,]).isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string,
-    content: PropTypes.arrayOf(PropTypes.shape({
-      type: PropTypes.oneOf([Types.TEXT, Types.IMAGE]).isRequired,
-      text: PropTypes.string,
-      arc: PropTypes.string,
-      alt: PropTypes.string
-    })).isRequired
+    content: PropTypes.arrayOf(PropTypes.node).isRequired
   }))
 };
 
@@ -178,20 +171,7 @@ export function TabBlock({ tabs }){
           id={getId([selectedTab.id, 'content'])}
           timeout={300}
           exit={false}>
-          <div>
-          { selectedTab.content.map((c, index) => (
-            <div key={index}>
-            { c.type === Types.TEXT &&
-              <p>{c.text}</p>
-            }
-            { c.type === Types.IMAGE &&
-              <ImageZoom
-                image={{src: c.src, alt: c.alt, className: styles.img}}
-                zoomImage={{src: c.src, alt: c.alt}}/>
-            }
-            </div>
-          ))}
-          </div>
+          <div>{selectedTab.content}</div>
         </CSSTransition>
       </TransitionGroup>
 

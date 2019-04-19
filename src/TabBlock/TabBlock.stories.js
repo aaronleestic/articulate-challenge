@@ -1,19 +1,60 @@
 import React from 'react';
-import { storiesOf, addDecorator } from '@storybook/react';
-import { withA11y } from '@storybook/addon-a11y';
-import { object, withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/react';
 import styles from "../App.module.scss";
-import { longContent, variedTabs, minimalContent, original, dualTabs } from "../data";
+import { original, variedTabs, longContent, minimalContent, dualTabs, charts, Types } from "../data";
 import { TabBlock } from "./TabBlock";
+import ImageZoom from 'react-medium-image-zoom';
+import { Bar, Line } from "react-chartjs-2";
 
-addDecorator(withA11y);
+const paragraphStyles = { margin: '.5em 0 1.5em' };
+const imgStyles =  {
+  'max-width': '100%',
+  'margin': '.5em 0 1em'
+};
+
+function formatIntoJsx(data){
+  return data.map(tab => ({
+    ...tab,
+    content: tab.content.map((c, index) => (
+      <div key={index}>
+        { c.type === Types.TEXT &&
+        <p style={paragraphStyles}>{c.text}</p>
+        }
+        { c.type === Types.IMAGE &&
+        <ImageZoom
+          image={{src: c.src, alt: c.alt, style: imgStyles}}
+          zoomImage={{src: c.src, alt: c.alt}}/>
+        }
+        { c.type === Types.BAR_CHART &&
+        <Bar data={c.data} options={c.options}/>
+        }
+        { c.type === Types.LINE_CHART &&
+        <div style={{ 'margin-bottom': '3em' }}>
+          <Line data={c.data} options={c.options}/>
+        </div>
+        }
+      </div>
+    ))
+  }));
+}
+
+const unformatted = [original, variedTabs, longContent, minimalContent, dualTabs, charts];
+const [
+  originalJsx,
+  variedTabsJsx,
+  longContentJsx,
+  minimalContentJsx,
+  dualTabsJsx,
+  chartsJsx
+] = unformatted.map(formatIntoJsx);
+
 
 storiesOf('TabBlock', module)
-.addDecorator(withKnobs({ escapeHTML: false }))
 .addDecorator(storyFn => <main className={styles.container}>{storyFn()}</main>)
-.add('original', () => <TabBlock tabs={object('tabs', original)}/>)
-.add('minimal', () => <TabBlock tabs={object('tabs', minimalContent)}/>)
-.add('dual tabs', () => <TabBlock tabs={dualTabs}/>)
-.add('varied tabs', () => <TabBlock tabs={variedTabs}/>)
-.add('long content', () => <TabBlock tabs={longContent}/>)
+.add('original', () => <TabBlock tabs={originalJsx}/>)
+.add('minimal', () => <TabBlock tabs={minimalContentJsx}/>)
+.add('dual tabs', () => <TabBlock tabs={dualTabsJsx}/>)
+.add('varied tabs', () => <TabBlock tabs={variedTabsJsx}/>)
+.add('long content', () => <TabBlock tabs={longContentJsx}/>)
+.add('charts', () => <TabBlock tabs={chartsJsx}/>)
 ;
